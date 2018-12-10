@@ -1,0 +1,81 @@
+<nz-breadcrumb>
+    <nz-breadcrumb-item>
+      博文
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      <a>我的文章</a>
+    </nz-breadcrumb-item>
+    <nz-breadcrumb-item>
+      写文章
+    </nz-breadcrumb-item>
+  </nz-breadcrumb>
+
+
+
+
+  <nz-card>
+      <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+          <div nz-row [nzGutter]="24">
+              <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="8" [nzXs]="24">标题</nz-form-label>
+                  <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <input formControlName="userName" nz-input placeholder="标题">
+                  </nz-form-control>
+                </nz-form-item>
+              </div>
+
+              <div nz-col [nzSpan]="12">
+                  <nz-form-item nzFlex>
+                    <nz-form-label [nzSm]="8" [nzXs]="24">分类</nz-form-label>
+                    <nz-form-control [nzSm]="16" [nzXs]="24">
+                        <nz-tree-select
+                        formControlName="userName"
+                        [nzDefaultExpandedKeys]="expandKeys"
+                        [nzNodes]="nodes"
+                        nzShowSearch
+                        nzPlaceHolder="Please select"
+                        [(ngModel)]="value"
+                        (ngModelChange)="onChange($event)">
+                      </nz-tree-select>
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+
+              <div nz-col [nzSpan]="24">
+                  <nz-form-item nzFlex>
+                    <nz-form-label [nzSm]="4" [nzXs]="24">标签</nz-form-label>
+                    <nz-form-control [nzSm]="20" [nzXs]="24">
+
+                        <nz-tag
+                        *ngIf="!inputVisible"
+                        class="editable-tag"
+                        (click)="showInput()">
+                        <i nz-icon type="plus"></i> New Tag
+                        </nz-tag>
+                        <input
+                        #inputElement
+                        nz-input
+                        nzSize="small"
+                        *ngIf="inputVisible"
+                        type="text"
+                        style="width: 78px;"
+                        formControlName="inputValue"
+                        (blur)="handleInputConfirm()"
+                        (keydown.enter)="handleInputConfirm()">
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+
+              <div nz-col [nzSpan]="24">
+                  <nz-form-item nzFlex>
+                    <nz-form-label [nzSm]="4" [nzXs]="24">分类</nz-form-label>
+                    <nz-form-control [nzSm]="20" [nzXs]="24">
+                        <textarea rows="4" nz-input     formControlName="userName"></textarea>
+                    </nz-form-control>
+                  </nz-form-item>
+              </div>
+          </div>
+      </form>
+    </nz-card>

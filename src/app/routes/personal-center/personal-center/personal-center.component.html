@@ -1,0 +1,6 @@
+
+  <ul nz-menu [nzMode]="'horizontal'">
+    <li nz-menu-item [nzSelected]="tab.selected"   *ngFor="let tab of tabs"  (click)="to(tab.key)">{{ tab.name }}</li>
+  </ul>
+
+  <router-outlet></router-outlet>

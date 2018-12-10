@@ -1,0 +1,39 @@
+<div nz-row nzType="flex" nzJustify="center">
+
+  <div nz-col nzSpan="6">
+     <img src="../../../../assets/img/nice-blog.png">
+  </div>
+
+  <div nz-col nzSpan="5">
+     <div class="example-input">
+      <nz-input-group  [nzSuffix]="suffixIcon">
+        <input placeholder="input here" nz-input [(ngModel)]="inputValue" (ngModelChange)="onChange($event)" [nzAutocomplete]="auto"/>
+      </nz-input-group>
+      <ng-template #suffixIcon>
+        <i nz-icon type="search"></i>
+      </ng-template>
+      <nz-autocomplete #auto>
+        <nz-auto-optgroup *ngFor="let group of optionGroups" [nzLabel]="groupTitle">
+          <ng-template #groupTitle>
+            <span>{{group.title}}
+              <a class="more-link" href="https://www.google.com/search?q=ng+zorro" target="_blank">更多</a>
+            </span>
+          </ng-template>
+          <nz-auto-option *ngFor="let option of group.children" [nzLabel]="option.title" [nzValue]="option">
+            {{option.title}}
+            <span class="certain-search-item-count">{{option.count}} 人  关注</span>
+          </nz-auto-option>
+        </nz-auto-optgroup>
+      </nz-autocomplete>
+    </div>
+  </div>
+
+  <div nz-col nzOffset="1" nzSpan="6">
+    <ul nz-menu nzMode="horizontal">
+      <li nz-menu-item [routerLink]="[ '/dashboard' ]" routerLinkActive="active"><i nz-icon type="mail"></i>主页</li>
+      <li nz-menu-item [routerLink]="[ '/explore' ]" routerLinkActive="active"><i nz-icon type="appstore"></i>发现</li>
+      <li nz-menu-item [routerLink]="[ '/article' ]" routerLinkActive="active"><i nz-icon type="appstore"></i>文章</li>
+      <li nz-menu-item [routerLink]="[ '/personalcenter' ]" routerLinkActive="active"><i nz-icon type="appstore"></i>用户</li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,61 @@
+<nz-card *ngIf="Visible">
+    <form nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+        <div nz-row [nzGutter]="24">
+            <div nz-col [nzSpan]="12">
+              <nz-form-item nzFlex>
+                <nz-form-label [nzSm]="8" [nzXs]="24">博友名称</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <input formControlName="userName" nz-input placeholder="博友名称">
+                </nz-form-control>
+              </nz-form-item>
+            </div>
+
+            <div nz-col [nzSpan]="12">
+                <nz-form-item nzFlex>
+                  <nz-form-label [nzSm]="8" [nzXs]="24">博友标语</nz-form-label>
+                  <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <input formControlName="userName" nz-input placeholder="博友标语">
+                  </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+          <div nz-col [nzSpan]="12">
+              <nz-form-item nzFlex>
+                <nz-form-label [nzSm]="8" [nzXs]="24">文章排序</nz-form-label>
+                <nz-form-control [nzSm]="16" [nzXs]="24">
+                    <nz-radio-group formControlName="formLayout" >
+                        <label nz-radio-button *ngFor="let m of menus" [nzValue]="m.value">{{m.title}}</label>
+                      </nz-radio-group>
+                </nz-form-control>
+              </nz-form-item>
+          </div>
+
+            <div nz-col [nzSpan]="12" style="text-align: right;">
+                <nz-form-item nzFlex>
+                  <nz-form-control [nzSm]="24" [nzXs]="24">
+                      <button nz-button [nzType]="'primary'">检索</button>
+                      <button nz-button (click)="resetForm()">清空</button>
+                  </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+    </form>
+  </nz-card>
+
+  <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+      <ng-template #item let-item>
+        <nz-list-item>
+          <nz-list-item-meta
+            [nzTitle]="nzTitle"
+            nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+            nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team">
+            <ng-template #nzTitle>
+              <a href="https://ng.ant.design">{{item.title}}</a>
+            </ng-template>
+          </nz-list-item-meta>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
