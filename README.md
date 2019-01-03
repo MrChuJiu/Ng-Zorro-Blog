@@ -1,6 +1,9 @@
 # Ng-Zorro-Blog
 用angular 写的博客前端   (如果那里有侵权请联系作者-马上下架)
 
+后台连接地址：https://github.com/HDONGDeveloper/Net-Core-Blog
+
+
 # 2018-12-10 
 前端完成基本样子,代码都是摘自ng-zorro 没有进行整理 所以很乱，后台开发完成后 会对代码进行一次整改
 
