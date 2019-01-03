@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { SearchService } from 'src/app/service/search.service';
+import { SearchService } from 'src/app/core/shartup/search.service';
 
 @Component({
   selector: 'app-myarticles',

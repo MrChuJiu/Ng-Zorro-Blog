@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injector } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SettingService } from 'src/app/core/shartup/setting.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +11,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
     <nz-form-item>
       <nz-form-control>
         <nz-input-group [nzPrefix]="prefixUser">
-          <input type="text" nz-input formControlName="userName" placeholder="Username">
+          <input type="text" nz-input formControlName="email" placeholder="email">
         </nz-input-group>
-        <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Please input your username!</nz-form-explain>
+        <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">Please input your email!</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -22,9 +24,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
         <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
+    <nz-alert *ngIf="errorMsg != '' "  nzType="error" [nzMessage]="errorMsg" nzShowIcon></nz-alert>
     <nz-form-item>
       <nz-form-control>
-        <label nz-checkbox formControlName="remember">
+        <label nz-checkbox >
           <span>记住密码</span>
         </label>
         <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
@@ -55,22 +58,32 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
   validateForm: FormGroup;
+  errorMsg = '';
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
     }
+    this.errorMsg = '';
+
+    this.http.post("/api/Login",this.validateForm.value).subscribe((data:any) => {
+      if (data.code === 200) {
+          this.settingService.setToken(`Bearer ${data.data}`);
+      } else {
+        this.errorMsg = data.Inform;
+      }
+    });
+
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private settingService:SettingService,private http:HttpClient) {
   }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
+      email: [ null, [ Validators.required ] ],
       password: [ null, [ Validators.required ] ],
-      remember: [ true ]
     });
   }
 }

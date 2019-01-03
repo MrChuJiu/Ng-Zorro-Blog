@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ElementRef } from '@angular/core'
 import { Subscription, fromEvent } from 'rxjs';
 import { Router, ActivationEnd } from '@angular/router';
 import { filter, debounceTime } from 'rxjs/operators';
-import { SearchService } from 'src/app/service/search.service';
+import { SearchService } from 'src/app/core/shartup/search.service';
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
